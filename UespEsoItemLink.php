@@ -12,6 +12,7 @@
  * 			- color?
  * 			- itemlink
  * 			- enchant data
+ * 		- Feedback/display when loading tooltip
  */
 
 $wgHooks['ParserFirstCallInit'][] = 'uespEsoItemLinkParserInit';
