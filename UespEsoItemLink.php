@@ -4,7 +4,14 @@
  * UespEsoItemLink -- by DAve Humphrey, dave@uesp.net, December 2014
  * 
  * Adds the <esoitemlink> tag extension to MediaWiki for displaying ESO item link popup.
- * 
+ *
+ * TODO:
+ * 		- Unify JS/CSS files with the EsoLog project (prevent duplicate code)
+ * 		- Add parameters:
+ * 			- nolink (don't link to the item page)
+ * 			- color?
+ * 			- itemlink
+ * 			- enchant data
  */
 
 $wgHooks['ParserFirstCallInit'][] = 'uespEsoItemLinkParserInit';
