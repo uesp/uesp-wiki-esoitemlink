@@ -1,8 +1,6 @@
 var EsoItemLinkPopup = null;
 var EsoItemLinkPopup_Visible = false;
-var EsoItemLinkPopup_LastItemId = -1;
-var EsoItemLinkPopup_LastLevel = -1;
-var EsoItemLinkPopup_LastQuality = -1;
+var EsoItemLinkPopup_CacheId = "";
 var EsoItemLinkPopup_Cache = { };
 
 
@@ -26,29 +24,22 @@ function ShowEsoItemLinkPopup(parent, itemId, level, quality)
 	EsoItemLinkPopup.css({ top: position.top-50, left: position.left + width });
 	EsoItemLinkPopup_Visible = true;
 	
-	cacheId = itemId.toString();
+	var cacheId = itemId.toString();
 	if (level) cacheId += "-L" + level.toString();
 	if (quality) cacheId += "-Q" + quality.toString();
+	EsoItemLinkPopup_CacheId = cacheId;
 	
-	if (EsoItemLinkPopup_LastItemId == itemId && EsoItemLinkPopup_LastLevel == level && EsoItemLinkPopup_LastQuality == quality)
+	if (EsoItemLinkPopup_Cache[cacheId] != null)
 	{
-		EsoItemLinkPopup.show();
-	}
-	else if (EsoItemLinkPopup_Cache[cacheId] != null)
-	{
+		console.log("Using cached item data " + cacheId);
 		EsoItemLinkPopup.html(EsoItemLinkPopup_Cache[cacheId]);
 		EsoItemLinkPopup.show();
 	}
 	else
 	{
-		EsoItemLinkPopup.load(linkSrc, "", function() { 
-			EsoItemLinkPopup_LastItemId = itemId; 
-			EsoItemLinkPopup_LastLevel = level;
-			EsoItemLinkPopup_LastQuality = quality;
-			
-			EsoItemLinkPopup_Cache[cacheId] = EsoItemLinkPopup.html();
-			
-			if (EsoItemLinkPopup_Visible) EsoItemLinkPopup.show(); 
+		EsoItemLinkPopup.load(linkSrc, "", function() {
+			if (EsoItemLinkPopup_Visible) EsoItemLinkPopup.show();
+			if (cacheId == EsoItemLinkPopup_CacheId) EsoItemLinkPopup_Cache[cacheId] = EsoItemLinkPopup.html();
 		});
 	}
 }
