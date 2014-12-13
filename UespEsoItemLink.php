@@ -42,6 +42,7 @@ function uespRenderEsoItemLink($input, array $args, Parser $parser, PPFrame $fra
 	$itemId = "";
 	$itemLevel = "";
 	$itemQuality = "";
+	$showSummary = false;
 	
 	foreach ($args as $name => $value)
 	{
@@ -53,12 +54,15 @@ function uespRenderEsoItemLink($input, array $args, Parser $parser, PPFrame $fra
 			$itemLevel = $value;
 		elseif ($name == "quality")
 			$itemQuality = $value;
+		elseif ($name == "summary")
+			$showSummary = $value;
 		
 	}
 	
 	$itemLink = "http://esoitem.uesp.net/itemLink.php?itemid=$itemId";
 	if ($itemLevel != "") $itemLink .= "&level=$itemLevel";
 	if ($itemQuality != "") $itemLink .= "&quality=$itemQuality";
+	if ($showSummary != "") $itemLink .= "&summary";
 	
 	if ($itemQuality == "")
 		$qualityClass = "eso_item_link_q0";
@@ -68,6 +72,7 @@ function uespRenderEsoItemLink($input, array $args, Parser $parser, PPFrame $fra
 	$attributes = "itemid='$itemId' ";
 	if ($itemLevel != "") $attributes .= "level='$itemLevel' ";
 	if ($itemQuality != "") $attributes .= "quality='$itemQuality' ";
+	if ($showSummary != "") $attributes .= "summary='1' ";
 	
 	$output = "<a href='$itemLink' class='eso_item_link $qualityClass' $attributes>$input</a>";
 	
@@ -76,3 +81,4 @@ function uespRenderEsoItemLink($input, array $args, Parser $parser, PPFrame $fra
 
 
 ?>
+
