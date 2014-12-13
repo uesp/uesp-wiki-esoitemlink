@@ -90,6 +90,15 @@
 }
 
 #esoil_itemlevelblock {
+	text-align: center;
+}
+
+#esoil_itemleftblock {
+	text-align: center;
+}
+
+#esoil_itemvalueblock {
+	text-align: center;
 }
 
 #esoil_itemlevelblock img {
@@ -109,10 +118,9 @@
 	font-size: 0.9em;
 	font-weight: bold;
 	height: 30px;
+	width: 120px;
 	line-height: 1.6em;
 	vertical-align: middle;
-	margin-right: 1.5em;
-	margin-left: 1.5em;
 	white-space: nowrap;
 }
 
