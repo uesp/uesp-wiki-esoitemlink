@@ -79,5 +79,3 @@ function uespRenderEsoItemLink($input, array $args, Parser $parser, PPFrame $fra
 }
 
 
-?>
-
