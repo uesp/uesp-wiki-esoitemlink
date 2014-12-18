@@ -32,7 +32,6 @@ function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary)
 	
 	if (EsoItemLinkPopup_Cache[cacheId] != null)
 	{
-		console.log("Using cached item data " + cacheId);
 		EsoItemLinkPopup.html(EsoItemLinkPopup_Cache[cacheId]);
 		EsoItemLinkPopup.show();
 	}
