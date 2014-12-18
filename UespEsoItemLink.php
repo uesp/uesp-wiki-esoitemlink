@@ -21,8 +21,8 @@ $wgHooks['BeforePageDisplay'][] = 'uesoEsoItemLink_beforePageDisplay';
 function uesoEsoItemLink_beforePageDisplay(&$out) {
 	global $wgScriptPath;
 	
-	$out->addHeadItem("uesp-esoitemlink-css", "<link rel='stylesheet' href='http://esoitem.uesp.net/resources/esoitemlink_embed.css?17Dec2014' />");
-	$out->addHeadItem("uesp-esoitemlink-js", "<script src='$wgScriptPath/extensions/UespEsoItemLink/uespitemlink.js?17Dec2014'></script>");
+	$out->addHeadItem("uesp-esoitemlink-css", "<link rel='stylesheet' href='http://esoitem.uesp.net/resources/esoitemlink_embed.css?18Dec2014' />");
+	$out->addHeadItem("uesp-esoitemlink-js", "<script src='$wgScriptPath/extensions/UespEsoItemLink/uespitemlink.js?18Dec2014'></script>");
 	
 	return true;
 }
