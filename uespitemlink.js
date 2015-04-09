@@ -40,6 +40,7 @@ function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLe
 	
 	if (level) cacheId += "-L" + level.toString();
 	if (quality) cacheId += "-Q" + quality.toString();
+	if (showSummary) cacheId += "-S";
 	EsoItemLinkPopup_CacheId = cacheId;
 	
 	if (cacheId != "" && EsoItemLinkPopup_Cache[cacheId] != null)
@@ -49,9 +50,7 @@ function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLe
 	}
 	else
 	{
-		console.debug(linkSrc);
 		EsoItemLinkPopup.load(linkSrc, "", function() {
-			console.debug("loaded", linkSrc);
 			if (EsoItemLinkPopup_Visible) EsoItemLinkPopup.show();
 			if (cacheId != "" && cacheId == EsoItemLinkPopup_CacheId) EsoItemLinkPopup_Cache[cacheId] = EsoItemLinkPopup.html();
 		});
