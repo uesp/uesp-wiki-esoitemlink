@@ -41,6 +41,9 @@ function uespRenderEsoItemLink($input, array $args, Parser $parser, PPFrame $fra
 	$itemId = "";
 	$itemLevel = "";
 	$itemQuality = "";
+	$itemLink = "";
+	$itemIntType = "";
+	$itemIntLevel = "";
 	$showSummary = false;
 	
 	foreach ($args as $name => $value)
@@ -55,13 +58,22 @@ function uespRenderEsoItemLink($input, array $args, Parser $parser, PPFrame $fra
 			$itemQuality = $value;
 		elseif ($name == "summary")
 			$showSummary = $value;
+		elseif ($name == "link")
+			$itemLink = $value;
+		elseif ($name == "inttype")
+			$itemIntType = $value;
+		elseif ($name == "intlevel")
+			$itemIntLevel = $value;
 		
 	}
 	
-	$itemLink = "http://esoitem.uesp.net/itemLink.php?itemid=$itemId";
-	if ($itemLevel != "") $itemLink .= "&level=$itemLevel";
-	if ($itemQuality != "") $itemLink .= "&quality=$itemQuality";
-	if ($showSummary != "") $itemLink .= "&summary";
+	$itemURL = "http://esoitem.uesp.net/itemLink.php?itemid=$itemId";
+	if ($itemLink != "") $itemURL .= "&link=$itemLink";
+	if ($itemIntLevel != "") $itemURL .= "&intlevel=$itemIntLevel";
+	if ($itemIntType != "") $itemURL .= "&inttype=$itemIntType";
+	if ($itemLevel != "") $itemURL .= "&level=$itemLevel";
+	if ($itemQuality != "") $itemURL .= "&quality=$itemQuality";
+	if ($showSummary != "") $itemURL .= "&summary";
 	
 	if ($itemQuality == "")
 		$qualityClass = "eso_item_link_q0";
@@ -71,9 +83,12 @@ function uespRenderEsoItemLink($input, array $args, Parser $parser, PPFrame $fra
 	$attributes = "itemid='$itemId' ";
 	if ($itemLevel != "") $attributes .= "level='$itemLevel' ";
 	if ($itemQuality != "") $attributes .= "quality='$itemQuality' ";
+	if ($itemIntLevel != "") $attributes .= "intlevel='$itemIntLevel' ";
+	if ($itemIntType != "") $attributes .= "inttype='$itemIntType' ";
+	if ($itemLink != "") $attributes .= "itemlink='$itemLink' ";
 	if ($showSummary != "") $attributes .= "summary='1' ";
 	
-	$output = "<a href='$itemLink' class='eso_item_link $qualityClass' $attributes>$input</a>";
+	$output = "<a href='$itemURL' class='eso_item_link $qualityClass' $attributes>$input</a>";
 	
 	return $output;
 }
