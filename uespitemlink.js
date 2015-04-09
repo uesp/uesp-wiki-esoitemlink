@@ -11,10 +11,13 @@ function CreateEsoItemLinkPopup()
 }
 
 
-function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary)
+function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLevel, intType, itemLink)
 {
 	var linkSrc = "http://esoitem.uesp.net/itemLink.php?itemid=" + itemId + "&embed";
 	
+	if (itemLink) linkSrc += "&link='" + itemLink + "'";
+	if (intLevel) linkSrc += "&intlevel=" + intLevel;
+	if (intType) linkSrc += "&inttype=" + intType;
 	if (level) linkSrc += "&level=" + level;
 	if (quality) linkSrc += "&quality=" + quality;
 	if (showSummary) linkSrc += "&summary";
@@ -55,7 +58,7 @@ function HideEsoItemLinkPopup()
 
 function OnEsoItemLinkEnter()
 {
-	ShowEsoItemLinkPopup(this, $(this).attr('itemid'), $(this).attr('level'), $(this).attr('quality'), $(this).attr('summary'));
+	ShowEsoItemLinkPopup(this, $(this).attr('itemid'), $(this).attr('level'), $(this).attr('quality'), $(this).attr('summary'), $(this).attr('intlevel'), $(this).attr('inttype')$(this).attr('itemlink'));
 }
 
 
