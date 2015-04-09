@@ -67,8 +67,9 @@ function uespRenderEsoItemLink($input, array $args, Parser $parser, PPFrame $fra
 		
 	}
 	
-	$itemURL = "http://esoitem.uesp.net/itemLink.php?itemid=$itemId";
-	if ($itemLink != "") $itemURL .= "&link=$itemLink";
+	$itemURL = "http://esoitem.uesp.net/itemLink.php?";
+	if ($itemId != "") $itemURL .= "&itemid=$itemId";
+	if ($itemLink != "") $itemURL .= "&link=\"$itemLink\"";
 	if ($itemIntLevel != "") $itemURL .= "&intlevel=$itemIntLevel";
 	if ($itemIntType != "") $itemURL .= "&inttype=$itemIntType";
 	if ($itemLevel != "") $itemURL .= "&level=$itemLevel";
@@ -80,7 +81,7 @@ function uespRenderEsoItemLink($input, array $args, Parser $parser, PPFrame $fra
 	else
 		$qualityClass = "eso_item_link_q" . $itemQuality;
 	
-	$attributes = "itemid='$itemId' ";
+	if ($itemId != "") $attributes = "itemid='$itemId' ";
 	if ($itemLevel != "") $attributes .= "level='$itemLevel' ";
 	if ($itemQuality != "") $attributes .= "quality='$itemQuality' ";
 	if ($itemIntLevel != "") $attributes .= "intlevel='$itemIntLevel' ";
