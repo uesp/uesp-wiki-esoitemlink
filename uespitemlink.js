@@ -14,14 +14,18 @@ function CreateEsoItemLinkPopup()
 function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLevel, intType, itemLink)
 {
 	var linkSrc = "http://esoitem.uesp.net/itemLink.php?&embed";
+	var dataOk = false;
 	
-	if (itemId)  linkSrc += "&itemid=" + itemId;
-	if (itemLink) linkSrc += "&link=\'" + encodeURIComponent(itemLink) + "\'";
+	if (itemId) { linkSrc += "&itemid=" + itemId; dataOk = true; }
+	if (itemLink) { linkSrc += "&link=\'" + encodeURIComponent(itemLink) + "\'"; dataOk = true; }
 	if (intLevel) linkSrc += "&intlevel=" + intLevel;
 	if (intType) linkSrc += "&inttype=" + intType;
 	if (level) linkSrc += "&level=" + level;
 	if (quality) linkSrc += "&quality=" + quality;
 	if (showSummary) linkSrc += "&summary";
+	
+	if (!dataOk) return false;
+	
 	if (EsoItemLinkPopup == null) CreateEsoItemLinkPopup();
 	
 	var position = $(parent).offset();
