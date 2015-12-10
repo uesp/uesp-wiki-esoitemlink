@@ -15,5 +15,7 @@ ignore = .hg*
 dest = content1.uesp.net:/home/uesp/www/w/extensions/UespEsoItemLink/
 dest = content2.uesp.net:/home/uesp/www/w/extensions/UespEsoItemLink/
 dest = content3.uesp.net:/home/uesp/www/w/extensions/UespEsoItemLink/
-# TODO: Mobile wikis
+dest = content1.uesp.net:/home/uesp/www-mobile/w/extensions/UespEsoItemLink/
+dest = content2.uesp.net:/home/uesp/www-mobile/w/extensions/UespEsoItemLink/
+dest = content3.uesp.net:/home/uesp/www-mobile/w/extensions/UespEsoItemLink/
 
