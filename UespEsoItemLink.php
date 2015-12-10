@@ -58,7 +58,7 @@ function uespRenderEsoItemLink($input, array $args, Parser $parser, PPFrame $fra
 			$itemQuality = $value;
 		elseif ($name == "summary")
 			$showSummary = $value;
-		elseif ($name == "link")
+		elseif ($name == "link" || $name == "itemlink")
 			$itemLink = $value;
 		elseif ($name == "inttype")
 			$itemIntType = $value;
