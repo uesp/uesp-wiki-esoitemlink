@@ -51,14 +51,64 @@ function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLe
 	{
 		EsoItemLinkPopup.html(EsoItemLinkPopup_Cache[cacheId]);
 		EsoItemLinkPopup.show();
+		AdjustEsoItemLinkTooltipPosition(EsoItemLinkPopup, $(parent));
 	}
 	else
 	{
 		EsoItemLinkPopup.load(linkSrc, "", function() {
 			if (EsoItemLinkPopup_Visible) EsoItemLinkPopup.show();
 			if (cacheId != "" && cacheId == EsoItemLinkPopup_CacheId) EsoItemLinkPopup_Cache[cacheId] = EsoItemLinkPopup.html();
+			AdjustEsoItemLinkTooltipPosition(EsoItemLinkPopup, $(parent));
 		});
 	}
+}
+
+
+function AdjustEsoItemLinkTooltipPosition(tooltip, parent)
+{
+     var windowWidth = $(window).width();
+     var windowHeight = $(window).height();
+     var toolTipWidth = tooltip.width();
+     var toolTipHeight = tooltip.height();
+     var elementHeight = parent.height();
+     var elementWidth = parent.width();
+     
+     var top = parent.offset().top - 150;
+     var left = parent.offset().left + parent.outerWidth() + 3;
+     
+     tooltip.offset({ top: top, left: left });
+     
+     var viewportTooltip = tooltip[0].getBoundingClientRect();
+     
+     if (viewportTooltip.bottom > windowHeight) 
+     {
+    	 var deltaHeight = viewportTooltip.bottom - windowHeight + 10;
+         top = top - deltaHeight
+     }
+     else if (viewportTooltip.top < 0)
+     {
+    	 var deltaHeight = viewportTooltip.top - 10;
+         top = top - deltaHeight
+     }
+         
+     if (viewportTooltip.right > windowWidth) 
+     {
+         left = left - toolTipWidth - parent.width() - 28;
+     }
+     
+     tooltip.offset({ top: top, left: left });
+     viewportTooltip = tooltip[0].getBoundingClientRect();
+     
+     if (viewportTooltip.left < 0 )
+     {
+    	 var el = $('<i/>').css('display','inline').insertBefore(parent[0]);
+         var realOffset = el.offset();
+         el.remove();
+         
+         left = realOffset.left - toolTipWidth - 3;
+         tooltip.offset({ top: top, left: left });
+     }
+     
 }
 
 
