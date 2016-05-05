@@ -11,11 +11,13 @@ function CreateEsoItemLinkPopup()
 }
 
 
-function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLevel, intType, itemLink, setCount)
+function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLevel, intType, itemLink, setCount, questId, collectId)
 {
 	var linkSrc = "http://esoitem.uesp.net/itemLink.php?&embed";
 	var dataOk = false;
 	
+	if (questId) { linkSrc += "&questid=" + questId; dataOk = true; }
+	if (collectId) { linkSrc += "&collectid=" + collectId; dataOk = true; }
 	if (itemId) { linkSrc += "&itemid=" + itemId; dataOk = true; }
 	if (itemLink) { linkSrc += "&link=\'" + encodeURIComponent(itemLink) + "\'"; dataOk = true; }
 	if (intLevel) linkSrc += "&intlevel=" + intLevel;
@@ -47,8 +49,14 @@ function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLe
 	else if (itemId) 
 	{
 		cacheId = itemId.toString();
-		if (level) cacheId += "-L" + level.toString();
-		if (quality) cacheId += "-Q" + quality.toString();
+	}
+	else if (questId) 
+	{
+		cacheId = "Q-" + questId.toString();
+	}
+	else if (collectId) 
+	{
+		cacheId = "C-" + collectId.toString();
 	}
 	
 	if (level) cacheId += "-L" + level.toString();
@@ -131,7 +139,7 @@ function HideEsoItemLinkPopup()
 
 function OnEsoItemLinkEnter()
 {
-	ShowEsoItemLinkPopup(this, $(this).attr('itemid'), $(this).attr('level'), $(this).attr('quality'), $(this).attr('summary'), $(this).attr('intlevel'), $(this).attr('inttype'), $(this).attr('itemlink'), $(this).attr('setcount'));
+	ShowEsoItemLinkPopup(this, $(this).attr('itemid'), $(this).attr('level'), $(this).attr('quality'), $(this).attr('summary'), $(this).attr('intlevel'), $(this).attr('inttype'), $(this).attr('itemlink'), $(this).attr('setcount'), $(this).attr('questid'), $(this).attr('collectid'));
 }
 
 
