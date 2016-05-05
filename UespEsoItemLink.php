@@ -18,11 +18,12 @@
 $wgHooks['ParserFirstCallInit'][] = 'uespEsoItemLinkParserInit';
 $wgHooks['BeforePageDisplay'][] = 'uesoEsoItemLink_beforePageDisplay';
 
+
 function uesoEsoItemLink_beforePageDisplay(&$out) {
 	global $wgScriptPath;
 	
-	$out->addHeadItem("uesp-esoitemlink-css", "<link rel='stylesheet' href='http://esoitem.uesp.net/resources/esoitemlink_embed.css?18Dec2014' />");
-	$out->addHeadItem("uesp-esoitemlink-js", "<script src='$wgScriptPath/extensions/UespEsoItemLink/uespitemlink.js?18Dec2014'></script>");
+	$out->addHeadItem("uesp-esoitemlink-css", "<link rel='stylesheet' href='http://esoitem.uesp.net/resources/esoitemlink_embed.css?5May2016' />");
+	$out->addHeadItem("uesp-esoitemlink-js", "<script src='$wgScriptPath/extensions/UespEsoItemLink/uespitemlink.js?5May2016'></script>");
 	
 	return true;
 }
@@ -45,6 +46,8 @@ function uespRenderEsoItemLink($input, array $args, Parser $parser, PPFrame $fra
 	$itemIntType = "";
 	$itemIntLevel = "";
 	$showSummary = false;
+	$questId = "";
+	$collectId = "";
 	
 	foreach ($args as $name => $value)
 	{
@@ -64,10 +67,16 @@ function uespRenderEsoItemLink($input, array $args, Parser $parser, PPFrame $fra
 			$itemIntType = $value;
 		elseif ($name == "intlevel")
 			$itemIntLevel = $value;
+		elseif ($name == "questid")
+			$questId = $value;
+		elseif ($name == "collectid")
+			$collectId = $value;
 		
 	}
 	
 	$itemURL = "http://esoitem.uesp.net/itemLink.php?";
+	if ($questId != "") $itemURL .= "&questid=$questId";
+	if ($collectId != "") $itemURL .= "&collectid=$collectId";
 	if ($itemId != "") $itemURL .= "&itemid=$itemId";
 	if ($itemLink != "") $itemURL .= "&link=\"$itemLink\"";
 	if ($itemIntLevel != "") $itemURL .= "&intlevel=$itemIntLevel";
@@ -77,10 +86,17 @@ function uespRenderEsoItemLink($input, array $args, Parser $parser, PPFrame $fra
 	if ($showSummary != "") $itemURL .= "&summary";
 	
 	if ($itemQuality == "")
+	{
 		$qualityClass = "eso_item_link_q0";
+		if ($questId != "" || $collectId != "") $qualityClass = "eso_item_link_q1";
+	}
 	else
+	{
 		$qualityClass = "eso_item_link_q" . $itemQuality;
+	}
 	
+	if ($questId != "") $attributes .= "questid='$questId' ";
+	if ($collectId != "") $attributes .= "collectid='$collectId' ";
 	if ($itemId != "") $attributes = "itemid='$itemId' ";
 	if ($itemLevel != "") $attributes .= "level='$itemLevel' ";
 	if ($itemQuality != "") $attributes .= "quality='$itemQuality' ";
@@ -93,5 +109,6 @@ function uespRenderEsoItemLink($input, array $args, Parser $parser, PPFrame $fra
 	
 	return $output;
 }
+
 
 
