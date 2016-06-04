@@ -11,7 +11,7 @@ function CreateEsoItemLinkPopup()
 }
 
 
-function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLevel, intType, itemLink, setCount, questId, collectId)
+function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLevel, intType, itemLink, setCount, questId, collectId, enchantId, enchantIntLevel, enchantIntType)
 {
 	var linkSrc = "http://esoitem.uesp.net/itemLink.php?&embed";
 	var dataOk = false;
@@ -24,6 +24,9 @@ function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLe
 	if (intType) linkSrc += "&inttype=" + intType;
 	if (level) linkSrc += "&level=" + level;
 	if (quality) linkSrc += "&quality=" + quality;
+	if (enchantId) linkSrc += "&enchantid=" + enchantId;
+	if (enchantIntLevel) linkSrc += "&enchantintlevel=" + enchantIntLevel;
+	if (enchantIntType) linkSrc += "&enchantinttype=" + enchantIntType;
 	if (showSummary) linkSrc += "&summary";
 	if (setCount != null && setCount != undefined && setCount >= 0) linkSrc += "&setcount=" + setCount;
 	
@@ -62,6 +65,12 @@ function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLe
 	if (level) cacheId += "-L" + level.toString();
 	if (quality) cacheId += "-Q" + quality.toString();
 	if (showSummary) cacheId += "-S";
+	
+	if (enchantId) 
+	{
+		cacheId += "-E" + enchantId.toString() + "-" + enchantIntLevel.toString() + "-" + enchantIntType.toString(); 
+	}
+	
 	EsoItemLinkPopup_CacheId = cacheId;
 	
 	if (cacheId != "" && EsoItemLinkPopup_Cache[cacheId] != null)
@@ -139,7 +148,7 @@ function HideEsoItemLinkPopup()
 
 function OnEsoItemLinkEnter()
 {
-	ShowEsoItemLinkPopup(this, $(this).attr('itemid'), $(this).attr('level'), $(this).attr('quality'), $(this).attr('summary'), $(this).attr('intlevel'), $(this).attr('inttype'), $(this).attr('itemlink'), $(this).attr('setcount'), $(this).attr('questid'), $(this).attr('collectid'));
+	ShowEsoItemLinkPopup(this, $(this).attr('itemid'), $(this).attr('level'), $(this).attr('quality'), $(this).attr('summary'), $(this).attr('intlevel'), $(this).attr('inttype'), $(this).attr('itemlink'), $(this).attr('setcount'), $(this).attr('questid'), $(this).attr('collectid'), $(this).attr('enchantid'), $(this).attr('enchantintlevel'), $(this).attr('enchantinttype'));
 }
 
 
