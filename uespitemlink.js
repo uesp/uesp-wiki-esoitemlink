@@ -1,4 +1,5 @@
 var EsoItemLinkPopup = null;
+var EsoItemLinkPopup_LastElement = null;
 var EsoItemLinkPopup_Visible = false;
 var EsoItemLinkPopup_CacheId = "";
 var EsoItemLinkPopup_Cache = { };
@@ -13,6 +14,8 @@ function CreateEsoItemLinkPopup()
 
 function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLevel, intType, itemLink, setCount, questId, collectId, enchantId, enchantIntLevel, enchantIntType)
 {
+	EsoItemLinkPopup_LastElement = parent;
+	
 	var linkSrc = "http://esoitem.uesp.net/itemLink.php?&embed";
 	var dataOk = false;
 	
@@ -81,9 +84,12 @@ function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLe
 	}
 	else
 	{
-		EsoItemLinkPopup.load(linkSrc, "", function() {
+		$.get(linkSrc, function(data) {
+			if (EsoItemLinkPopup_LastElement == null) return;
+			if (EsoItemLinkPopup_LastElement !== parent) return;
+			EsoItemLinkPopup.html(data);
 			if (EsoItemLinkPopup_Visible) EsoItemLinkPopup.show();
-			if (cacheId != "" && cacheId == EsoItemLinkPopup_CacheId) EsoItemLinkPopup_Cache[cacheId] = EsoItemLinkPopup.html();
+			if (cacheId != "" && cacheId == EsoItemLinkPopup_CacheId) EsoItemLinkPopup_Cache[cacheId] = data;
 			AdjustEsoItemLinkTooltipPosition(EsoItemLinkPopup, $(parent));
 		});
 	}
@@ -148,12 +154,19 @@ function HideEsoItemLinkPopup()
 
 function OnEsoItemLinkEnter()
 {
-	ShowEsoItemLinkPopup(this, $(this).attr('itemid'), $(this).attr('level'), $(this).attr('quality'), $(this).attr('summary'), $(this).attr('intlevel'), $(this).attr('inttype'), $(this).attr('itemlink'), $(this).attr('setcount'), $(this).attr('questid'), $(this).attr('collectid'), $(this).attr('enchantid'), $(this).attr('enchantintlevel'), $(this).attr('enchantinttype'));
+	var $this = $(this);
+	EsoItemLinkPopup_LastElement = $this;
+	
+	ShowEsoItemLinkPopup(EsoItemLinkPopup_LastElement, $this.attr('itemid'), $this.attr('level'), $this.attr('quality'), 
+			$this.attr('summary'), $this.attr('intlevel'), $this.attr('inttype'), $this.attr('itemlink'), $this.attr('setcount'),
+			$this.attr('questid'), $this.attr('collectid'), $this.attr('enchantid'), $this.attr('enchantintlevel'),
+			$this.attr('enchantinttype'));
 }
 
 
 function OnEsoItemLinkLeave()
 {
+	EsoItemLinkPopup_LastElement = null;
 	HideEsoItemLinkPopup();
 }
 
