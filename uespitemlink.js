@@ -31,7 +31,7 @@ function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLe
 	if (enchantIntLevel) linkSrc += "&enchantintlevel=" + enchantIntLevel;
 	if (enchantIntType) linkSrc += "&enchantinttype=" + enchantIntType;
 	if (showSummary) linkSrc += "&summary";
-	if (setCount != null && setCount != undefined && setCount >= 0) linkSrc += "&setcount=" + setCount;
+	if (setCount != null && setCount >= 0) linkSrc += "&setcount=" + setCount;
 	
 	if (!dataOk) return false;
 	
@@ -68,6 +68,7 @@ function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLe
 	if (level) cacheId += "-L" + level.toString();
 	if (quality) cacheId += "-Q" + quality.toString();
 	if (showSummary) cacheId += "-S";
+	if (setCount) cacheId += "-SC" + setCount.toString();
 	
 	if (enchantId) 
 	{
