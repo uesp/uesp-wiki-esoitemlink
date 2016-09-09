@@ -30,7 +30,7 @@ function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLe
 	if (enchantId) linkSrc += "&enchantid=" + enchantId;
 	if (enchantIntLevel) linkSrc += "&enchantintlevel=" + enchantIntLevel;
 	if (enchantIntType) linkSrc += "&enchantinttype=" + enchantIntType;
-	if (enchantFactor) linkSrc += "&enchantfactor=" + enchantIntType;
+	if (enchantFactor) linkSrc += "&enchantfactor=" + enchantFactor;
 	if (showSummary) linkSrc += "&summary";
 	if (setCount != null && setCount >= 0) linkSrc += "&setcount=" + setCount;
 	
