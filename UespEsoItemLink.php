@@ -48,6 +48,7 @@ function uespRenderEsoItemLink($input, array $args, Parser $parser, PPFrame $fra
 	$showSummary = false;
 	$questId = "";
 	$collectId = "";
+	$enchantFactor = "";
 	
 	foreach ($args as $name => $value)
 	{
@@ -71,6 +72,8 @@ function uespRenderEsoItemLink($input, array $args, Parser $parser, PPFrame $fra
 			$questId = $value;
 		elseif ($name == "collectid")
 			$collectId = $value;
+		elseif ($name == "enchantfactor")
+			$enchantFactor = $value;
 		
 	}
 	
@@ -83,6 +86,7 @@ function uespRenderEsoItemLink($input, array $args, Parser $parser, PPFrame $fra
 	if ($itemIntType != "") $itemURL .= "&inttype=$itemIntType";
 	if ($itemLevel != "") $itemURL .= "&level=$itemLevel";
 	if ($itemQuality != "") $itemURL .= "&quality=$itemQuality";
+	if ($enchantFactor != "") $itemURL .= "&enchantfactor=$enchantFactor";
 	if ($showSummary != "") $itemURL .= "&summary";
 	
 	if ($itemQuality == "")
@@ -103,6 +107,7 @@ function uespRenderEsoItemLink($input, array $args, Parser $parser, PPFrame $fra
 	if ($itemIntLevel != "") $attributes .= "intlevel='$itemIntLevel' ";
 	if ($itemIntType != "") $attributes .= "inttype='$itemIntType' ";
 	if ($itemLink != "") $attributes .= "itemlink='$itemLink' ";
+	if ($enchantFactor != "") $attributes .= "itemlink='$enchantFactor' ";
 	if ($showSummary != "") $attributes .= "summary='1' ";
 	
 	$output = "<a href='$itemURL' class='eso_item_link $qualityClass' $attributes>$input</a>";

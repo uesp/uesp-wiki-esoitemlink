@@ -12,7 +12,7 @@ function CreateEsoItemLinkPopup()
 }
 
 
-function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLevel, intType, itemLink, setCount, questId, collectId, enchantId, enchantIntLevel, enchantIntType)
+function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLevel, intType, itemLink, setCount, questId, collectId, enchantId, enchantIntLevel, enchantIntType, enchantFactor)
 {
 	EsoItemLinkPopup_LastElement = parent;
 	
@@ -30,6 +30,7 @@ function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLe
 	if (enchantId) linkSrc += "&enchantid=" + enchantId;
 	if (enchantIntLevel) linkSrc += "&enchantintlevel=" + enchantIntLevel;
 	if (enchantIntType) linkSrc += "&enchantinttype=" + enchantIntType;
+	if (enchantFactor) linkSrc += "&enchantfactor=" + enchantIntType;
 	if (showSummary) linkSrc += "&summary";
 	if (setCount != null && setCount >= 0) linkSrc += "&setcount=" + setCount;
 	
@@ -69,10 +70,11 @@ function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLe
 	if (quality) cacheId += "-Q" + quality.toString();
 	if (showSummary) cacheId += "-S";
 	if (setCount) cacheId += "-SC" + setCount.toString();
+	if (enchantFactor) cacheId += "-EF" + enchantFactor.toString();
 	
-	if (enchantId) 
+	if (enchantId)
 	{
-		cacheId += "-E" + enchantId.toString() + "-" + enchantIntLevel.toString() + "-" + enchantIntType.toString(); 
+		cacheId += "-E" + enchantId.toString() + "-" + enchantIntLevel.toString() + "-" + enchantIntType.toString();
 	}
 	
 	EsoItemLinkPopup_CacheId = cacheId;
