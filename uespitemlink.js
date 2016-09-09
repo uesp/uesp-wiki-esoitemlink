@@ -163,7 +163,7 @@ function OnEsoItemLinkEnter()
 	ShowEsoItemLinkPopup(EsoItemLinkPopup_LastElement, $this.attr('itemid'), $this.attr('level'), $this.attr('quality'), 
 			$this.attr('summary'), $this.attr('intlevel'), $this.attr('inttype'), $this.attr('itemlink'), $this.attr('setcount'),
 			$this.attr('questid'), $this.attr('collectid'), $this.attr('enchantid'), $this.attr('enchantintlevel'),
-			$this.attr('enchantinttype'), $this.attr('enchantfactor');
+			$this.attr('enchantinttype'), $this.attr('enchantfactor'));
 }
 
 
