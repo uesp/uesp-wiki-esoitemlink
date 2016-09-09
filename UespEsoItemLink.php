@@ -107,7 +107,7 @@ function uespRenderEsoItemLink($input, array $args, Parser $parser, PPFrame $fra
 	if ($itemIntLevel != "") $attributes .= "intlevel='$itemIntLevel' ";
 	if ($itemIntType != "") $attributes .= "inttype='$itemIntType' ";
 	if ($itemLink != "") $attributes .= "itemlink='$itemLink' ";
-	if ($enchantFactor != "") $attributes .= "itemlink='$enchantFactor' ";
+	if ($enchantFactor != "") $attributes .= "enchantfactor='$enchantFactor' ";
 	if ($showSummary != "") $attributes .= "summary='1' ";
 	
 	$output = "<a href='$itemURL' class='eso_item_link $qualityClass' $attributes>$input</a>";
