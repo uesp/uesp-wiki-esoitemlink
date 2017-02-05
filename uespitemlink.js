@@ -12,7 +12,7 @@ function CreateEsoItemLinkPopup()
 }
 
 
-function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLevel, intType, itemLink, setCount, questId, collectId, enchantId, enchantIntLevel, enchantIntType, enchantFactor)
+function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLevel, intType, itemLink, setCount, questId, collectId, enchantId, enchantIntLevel, enchantIntType, enchantFactor, potionData)
 {
 	EsoItemLinkPopup_LastElement = parent;
 	
@@ -31,6 +31,7 @@ function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLe
 	if (enchantIntLevel) linkSrc += "&enchantintlevel=" + enchantIntLevel;
 	if (enchantIntType) linkSrc += "&enchantinttype=" + enchantIntType;
 	if (enchantFactor) linkSrc += "&enchantfactor=" + enchantFactor;
+	if (potionData) linkSrc += "&potiondata=" + potionData;
 	if (showSummary) linkSrc += "&summary";
 	if (setCount != null && setCount >= 0) linkSrc += "&setcount=" + setCount;
 	
@@ -163,7 +164,7 @@ function OnEsoItemLinkEnter()
 	ShowEsoItemLinkPopup(EsoItemLinkPopup_LastElement, $this.attr('itemid'), $this.attr('level'), $this.attr('quality'), 
 			$this.attr('summary'), $this.attr('intlevel'), $this.attr('inttype'), $this.attr('itemlink'), $this.attr('setcount'),
 			$this.attr('questid'), $this.attr('collectid'), $this.attr('enchantid'), $this.attr('enchantintlevel'),
-			$this.attr('enchantinttype'), $this.attr('enchantfactor'));
+			$this.attr('enchantinttype'), $this.attr('enchantfactor'), $this.attr('potiondata'));
 }
 
 
