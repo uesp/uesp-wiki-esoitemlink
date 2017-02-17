@@ -12,7 +12,7 @@ function CreateEsoItemLinkPopup()
 }
 
 
-function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLevel, intType, itemLink, setCount, questId, collectId, enchantId, enchantIntLevel, enchantIntType, enchantFactor, potionData)
+function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLevel, intType, itemLink, setCount, questId, collectId, enchantId, enchantIntLevel, enchantIntType, enchantFactor, potionData, extraData)
 {
 	EsoItemLinkPopup_LastElement = parent;
 	
@@ -32,6 +32,7 @@ function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLe
 	if (enchantIntType) linkSrc += "&enchantinttype=" + enchantIntType;
 	if (enchantFactor) linkSrc += "&enchantfactor=" + enchantFactor;
 	if (potionData) linkSrc += "&potiondata=" + potionData;
+	if (extraData) linkSrc += "&extradata=" + extraData;
 	if (showSummary) linkSrc += "&summary";
 	if (setCount != null && setCount >= 0) linkSrc += "&setcount=" + setCount;
 	
@@ -72,6 +73,8 @@ function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLe
 	if (showSummary) cacheId += "-S";
 	if (setCount) cacheId += "-SC" + setCount.toString();
 	if (enchantFactor) cacheId += "-EF" + enchantFactor.toString();
+	if (potionData) cacheId += "-PD" + potionData.toString();
+	if (extraData) cacheId += "-EX" + extraData.toString();
 	
 	if (enchantId)
 	{
@@ -164,7 +167,7 @@ function OnEsoItemLinkEnter()
 	ShowEsoItemLinkPopup(EsoItemLinkPopup_LastElement, $this.attr('itemid'), $this.attr('level'), $this.attr('quality'), 
 			$this.attr('summary'), $this.attr('intlevel'), $this.attr('inttype'), $this.attr('itemlink'), $this.attr('setcount'),
 			$this.attr('questid'), $this.attr('collectid'), $this.attr('enchantid'), $this.attr('enchantintlevel'),
-			$this.attr('enchantinttype'), $this.attr('enchantfactor'), $this.attr('potiondata'));
+			$this.attr('enchantinttype'), $this.attr('enchantfactor'), $this.attr('potiondata'), $this.attr('extradata'));
 }
 
 
