@@ -49,6 +49,7 @@ function uespRenderEsoItemLink($input, array $args, Parser $parser, PPFrame $fra
 	$questId = "";
 	$collectId = "";
 	$enchantFactor = "";
+	$color = "";
 	
 	foreach ($args as $name => $value)
 	{
@@ -74,6 +75,8 @@ function uespRenderEsoItemLink($input, array $args, Parser $parser, PPFrame $fra
 			$collectId = $value;
 		elseif ($name == "enchantfactor")
 			$enchantFactor = $value;
+		elseif ($name == "color")
+			$color = $value;
 		
 	}
 	
@@ -109,6 +112,7 @@ function uespRenderEsoItemLink($input, array $args, Parser $parser, PPFrame $fra
 	if ($itemLink != "") $attributes .= "itemlink='$itemLink' ";
 	if ($enchantFactor != "") $attributes .= "enchantfactor='$enchantFactor' ";
 	if ($showSummary != "") $attributes .= "summary='1' ";
+	if ($color != "") $attributes .= "style=\"color: $color !important;\" ";
 	
 	$output = "<a href='$itemURL' class='eso_item_link $qualityClass' $attributes>$input</a>";
 	
