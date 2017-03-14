@@ -22,8 +22,8 @@ $wgHooks['BeforePageDisplay'][] = 'uesoEsoItemLink_beforePageDisplay';
 function uesoEsoItemLink_beforePageDisplay(&$out) {
 	global $wgScriptPath;
 	
-	$out->addHeadItem("uesp-esoitemlink-css", "<link rel='stylesheet' href='http://esolog-static.uesp.net/resources/esoitemlink_embed.css?5May2016' />");
-	$out->addHeadItem("uesp-esoitemlink-js", "<script src='$wgScriptPath/extensions/UespEsoItemLink/uespitemlink.js?5May2016'></script>");
+	$out->addHeadItem("uesp-esoitemlink-css", "<link rel='stylesheet' href='http://esolog-static.uesp.net/resources/esoitemlink_embed.css?14March2017' />");
+	$out->addHeadItem("uesp-esoitemlink-js", "<script src='$wgScriptPath/extensions/UespEsoItemLink/uespitemlink.js?14March2017'></script>");
 	
 	return true;
 }
@@ -49,6 +49,7 @@ function uespRenderEsoItemLink($input, array $args, Parser $parser, PPFrame $fra
 	$questId = "";
 	$collectId = "";
 	$enchantFactor = "";
+	$version = "";
 	$color = "";
 	
 	foreach ($args as $name => $value)
@@ -77,6 +78,8 @@ function uespRenderEsoItemLink($input, array $args, Parser $parser, PPFrame $fra
 			$enchantFactor = $value;
 		elseif ($name == "color")
 			$color = $value;
+		elseif ($name == "version")
+			$version = $value;
 		
 	}
 	
@@ -91,6 +94,7 @@ function uespRenderEsoItemLink($input, array $args, Parser $parser, PPFrame $fra
 	if ($itemQuality != "") $itemURL .= "&quality=$itemQuality";
 	if ($enchantFactor != "") $itemURL .= "&enchantfactor=$enchantFactor";
 	if ($showSummary != "") $itemURL .= "&summary";
+	if ($version != "") $itemURL .= "&$version=$version";
 	
 	if ($itemQuality == "")
 	{
@@ -113,6 +117,7 @@ function uespRenderEsoItemLink($input, array $args, Parser $parser, PPFrame $fra
 	if ($enchantFactor != "") $attributes .= "enchantfactor='$enchantFactor' ";
 	if ($showSummary != "") $attributes .= "summary='1' ";
 	if ($color != "") $attributes .= "style=\"color: $color !important;\" ";
+	if ($version != "") $attributes .= "version='$version' ";
 	
 	$output = "<a href='$itemURL' class='eso_item_link $qualityClass' $attributes>$input</a>";
 	
