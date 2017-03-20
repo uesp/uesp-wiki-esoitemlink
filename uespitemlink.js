@@ -88,17 +88,25 @@ function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLe
 	{
 		EsoItemLinkPopup.html(EsoItemLinkPopup_Cache[cacheId]);
 		EsoItemLinkPopup.show();
+		
 		AdjustEsoItemLinkTooltipPosition(EsoItemLinkPopup, $(parent));
+		
+		$(document).trigger("esoTooltipUpdate", [EsoItemLinkPopup]);
 	}
 	else
 	{
 		$.get(linkSrc, function(data) {
 			if (EsoItemLinkPopup_LastElement == null) return;
 			if (EsoItemLinkPopup_LastElement !== parent) return;
+			
 			EsoItemLinkPopup.html(data);
+			
 			if (EsoItemLinkPopup_Visible) EsoItemLinkPopup.show();
 			if (cacheId != "" && cacheId == EsoItemLinkPopup_CacheId) EsoItemLinkPopup_Cache[cacheId] = data;
+			
 			AdjustEsoItemLinkTooltipPosition(EsoItemLinkPopup, $(parent));
+			
+			$(document).trigger("esoTooltipUpdate", [EsoItemLinkPopup]);
 		});
 	}
 }
