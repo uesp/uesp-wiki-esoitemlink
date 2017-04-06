@@ -22,7 +22,7 @@ $wgHooks['BeforePageDisplay'][] = 'uesoEsoItemLink_beforePageDisplay';
 function uesoEsoItemLink_beforePageDisplay(&$out) {
 	global $wgScriptPath;
 	
-	$out->addHeadItem("uesp-esoitemlink-css", "<link rel='stylesheet' href='http://esolog-static.uesp.net/resources/esoitemlink_embed.css?14March2017' />");
+	$out->addHeadItem("uesp-esoitemlink-css", "<link rel='stylesheet' href='//esolog-static.uesp.net/resources/esoitemlink_embed.css?14March2017' />");
 	$out->addHeadItem("uesp-esoitemlink-js", "<script src='$wgScriptPath/extensions/UespEsoItemLink/uespitemlink.js?14March2017'></script>");
 	
 	return true;
@@ -83,7 +83,7 @@ function uespRenderEsoItemLink($input, array $args, Parser $parser, PPFrame $fra
 		
 	}
 	
-	$itemURL = "http://esoitem.uesp.net/itemLink.php?";
+	$itemURL = "//esoitem.uesp.net/itemLink.php?";
 	if ($questId != "") $itemURL .= "&questid=$questId";
 	if ($collectId != "") $itemURL .= "&collectid=$collectId";
 	if ($itemId != "") $itemURL .= "&itemid=$itemId";
