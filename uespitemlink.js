@@ -16,7 +16,7 @@ function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLe
 {
 	EsoItemLinkPopup_LastElement = parent;
 	
-	var linkSrc = "http://esoitem.uesp.net/itemLink.php?&embed";
+	var linkSrc = "//esoitem.uesp.net/itemLink.php?&embed";
 	var dataOk = false;
 	
 	if (questId) { linkSrc += "&questid=" + questId; dataOk = true; }
