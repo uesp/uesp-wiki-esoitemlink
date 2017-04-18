@@ -20,11 +20,24 @@ $wgHooks['BeforePageDisplay'][] = 'uesoEsoItemLink_beforePageDisplay';
 
 
 function uesoEsoItemLink_beforePageDisplay(&$out) {
-	global $wgScriptPath;
+	global $wgScriptPath, $wgUser;
 	
 	$out->addHeadItem("uesp-esoitemlink-css", "<link rel='stylesheet' href='//esolog-static.uesp.net/resources/esoitemlink_embed.css?14March2017' />");
 	$out->addHeadItem("uesp-esoitemlink-js", "<script src='$wgScriptPath/extensions/UespEsoItemLink/uespitemlink.js?14March2017'></script>");
 	
+	// ESO-Morrowind Beta Permission Code
+	$groups = $wgUser->getGroups();
+	
+	$_SESSION['uesp_eso_morrowind'] = 123456;
+	
+	foreach ($groups as $group)
+	{
+		if ($group == 'esomorrowind')
+		{
+			$_SESSION['uesp_eso_morrowind'] = 654321;
+		}
+	} // End ESO-Morrowind Beta Permission
+
 	return true;
 }
 
