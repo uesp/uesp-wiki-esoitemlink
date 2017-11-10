@@ -64,6 +64,7 @@ function uespRenderEsoItemLink($input, array $args, Parser $parser, PPFrame $fra
 	$enchantFactor = "";
 	$version = "";
 	$color = "";
+	$trait = "";
 	
 	foreach ($args as $name => $value)
 	{
@@ -93,7 +94,8 @@ function uespRenderEsoItemLink($input, array $args, Parser $parser, PPFrame $fra
 			$color = $value;
 		elseif ($name == "version")
 			$version = $value;
-		
+		elseif ($name == "trait")
+			$trait = $value;		
 	}
 	
 	$itemURL = "//esoitem.uesp.net/itemLink.php?";
@@ -107,7 +109,8 @@ function uespRenderEsoItemLink($input, array $args, Parser $parser, PPFrame $fra
 	if ($itemQuality != "") $itemURL .= "&quality=$itemQuality";
 	if ($enchantFactor != "") $itemURL .= "&enchantfactor=$enchantFactor";
 	if ($showSummary != "") $itemURL .= "&summary";
-	if ($version != "") $itemURL .= "&$version=$version";
+	if ($version != "") $itemURL .= "&version=$version";
+	if ($trait != "") $itemURL .= "&trait=$trait";
 	
 	if ($itemQuality == "")
 	{
@@ -131,6 +134,7 @@ function uespRenderEsoItemLink($input, array $args, Parser $parser, PPFrame $fra
 	if ($showSummary != "") $attributes .= "summary='1' ";
 	if ($color != "") $attributes .= "style=\"color: $color !important;\" ";
 	if ($version != "") $attributes .= "version='$version' ";
+	if ($trait != "") $attributes .= "trait='$trait' ";
 	
 	$output = "<a href='$itemURL' class='eso_item_link $qualityClass' $attributes>$input</a>";
 	
