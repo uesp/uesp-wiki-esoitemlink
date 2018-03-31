@@ -22,8 +22,8 @@ $wgHooks['BeforePageDisplay'][] = 'uesoEsoItemLink_beforePageDisplay';
 function uesoEsoItemLink_beforePageDisplay(&$out) {
 	global $wgScriptPath, $wgUser;
 	
-	$out->addHeadItem("uesp-esoitemlink-css", "<link rel='stylesheet' href='//esolog-static.uesp.net/resources/esoitemlink_embed.css?13Nov2017' />");
-	$out->addHeadItem("uesp-esoitemlink-js", "<script src='$wgScriptPath/extensions/UespEsoItemLink/uespitemlink.js?13Nov2017'></script>");
+	$out->addHeadItem("uesp-esoitemlink-css", "<link rel='stylesheet' href='//esolog-static.uesp.net/resources/esoitemlink_embed.css?31March2018' />");
+	$out->addHeadItem("uesp-esoitemlink-js", "<script src='$wgScriptPath/extensions/UespEsoItemLink/uespitemlink.js?31March2018'></script>");
 	
 	// ESO-Morrowind Beta Permission Code
 	$groups = $wgUser->getGroups();

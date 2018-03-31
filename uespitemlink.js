@@ -118,48 +118,76 @@ function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLe
 
 function AdjustEsoItemLinkTooltipPosition(tooltip, parent)
 {
-     var windowWidth = $(window).width();
-     var windowHeight = $(window).height();
-     var toolTipWidth = tooltip.width();
-     var toolTipHeight = tooltip.height();
-     var elementHeight = parent.height();
-     var elementWidth = parent.width();
+	var windowWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+	var windowHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    var toolTipWidth = tooltip.width();
+    var toolTipHeight = tooltip.height();
+    var elementHeight = parent.height();
+    var elementWidth = parent.width();
+    var NARROW_WINDOW_WIDTH = 800;
      
-     var top = parent.offset().top - 150;
-     var left = parent.offset().left + parent.outerWidth() + 3;
+    var top = parent.offset().top - 150;
+    var left = parent.offset().left + parent.outerWidth() + 3;
+    
+    if (windowWidth < NARROW_WINDOW_WIDTH)
+    {
+    	top = parent.offset().top - 25 - toolTipHeight;
+    	left = parent.offset().left - toolTipWidth/2 + elementWidth/2;
+    }
      
-     tooltip.offset({ top: top, left: left });
+    tooltip.offset({ top: top, left: left });
      
-     var viewportTooltip = tooltip[0].getBoundingClientRect();
+    var viewportTooltip = tooltip[0].getBoundingClientRect();
      
-     if (viewportTooltip.bottom > windowHeight) 
-     {
-    	 var deltaHeight = viewportTooltip.bottom - windowHeight + 10;
-         top = top - deltaHeight
-     }
-     else if (viewportTooltip.top < 0)
-     {
-    	 var deltaHeight = viewportTooltip.top - 10;
-         top = top - deltaHeight
-     }
+    if (viewportTooltip.bottom > windowHeight) 
+    {
+    	var deltaHeight = viewportTooltip.bottom - windowHeight + 10;
+        top = top - deltaHeight;
+    }
+    else if (viewportTooltip.top < 0)
+    {
+    	var deltaHeight = viewportTooltip.top - 10;
+    	
+    	if (windowWidth < NARROW_WINDOW_WIDTH) deltaHeight = -toolTipHeight - elementHeight - 30;
+    	
+        top = top - deltaHeight;
+    }
          
-     if (viewportTooltip.right > windowWidth) 
-     {
-         left = left - toolTipWidth - parent.width() - 28;
-     }
+    if (viewportTooltip.right > windowWidth) 
+    {
+    	var deltaLeft = -toolTipWidth - parent.width() - 28;
+
+    	if (windowWidth < NARROW_WINDOW_WIDTH)
+    	{
+    		deltaLeft = windowWidth - viewportTooltip.right - 10;
+    	}
+    		
+    	left = left + deltaLeft;
+    }
+    
+    if (viewportTooltip.left < 0)
+    {
+    	if (windowWidth < NARROW_WINDOW_WIDTH)
+    		left = left - viewportTooltip.left + 10;
+    	else
+    		left = left;
+    }
      
-     tooltip.offset({ top: top, left: left });
-     viewportTooltip = tooltip[0].getBoundingClientRect();
+    tooltip.offset({ top: top, left: left });
+    viewportTooltip = tooltip[0].getBoundingClientRect();
      
-     if (viewportTooltip.left < 0 )
-     {
-    	 var el = $('<i/>').css('display','inline').insertBefore(parent[0]);
-         var realOffset = el.offset();
-         el.remove();
+    if (viewportTooltip.left < 0 )
+    {
+    	//var el = $('<i/>').css('display','inline').insertBefore(parent[0]);
+        //var realOffset = el.offset();
+        //el.remove();
          
-         left = realOffset.left - toolTipWidth - 3;
-         tooltip.offset({ top: top, left: left });
-     }
+        //left = realOffset.left - toolTipWidth - 3;
+    	
+   		left = left - viewportTooltip.left + 10;
+    	
+        tooltip.offset({ top: top, left: left });
+    }
      
 }
 
