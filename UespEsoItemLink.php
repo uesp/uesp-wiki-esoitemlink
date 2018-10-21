@@ -16,35 +16,33 @@
  */
 
 $wgHooks['ParserFirstCallInit'][] = 'uespEsoItemLinkParserInit';
-$wgHooks['BeforePageDisplay'][] = 'uesoEsoItemLink_beforePageDisplay';
 
+$wgResourceModules['ext.EsoItemLink.styles'] = array(
+	'position' => 'top',
+	'styles' => array( 'esoitemlink_embed.css' ),
+	'localBasePath' => '/home/uesp/esolog.static/resources/',
+	'remoteBasePath' => '//esolog-static.uesp.net/resources/',
+	'targets' => array( 'desktop', 'mobile' ),
+);
 
-function uesoEsoItemLink_beforePageDisplay(&$out) {
-	global $wgScriptPath, $wgUser;
-	
-	$out->addHeadItem("uesp-esoitemlink-css", "<link rel='stylesheet' href='//esolog-static.uesp.net/resources/esoitemlink_embed.css?31March2018' />");
-	$out->addHeadItem("uesp-esoitemlink-js", "<script src='$wgScriptPath/extensions/UespEsoItemLink/uespitemlink.js?31March2018'></script>");
-	
-	// ESO-Morrowind Beta Permission Code
-	$groups = $wgUser->getGroups();
-	
-	$_SESSION['uesp_eso_morrowind'] = 123456;
-	
-	foreach ($groups as $group)
-	{
-		if ($group == 'esomorrowind')
-		{
-			$_SESSION['uesp_eso_morrowind'] = 654321;
-		}
-	} // End ESO-Morrowind Beta Permission
-
-	return true;
-}
+$wgResourceModules['ext.EsoItemLink.scripts'] = array(
+	'position' => 'top',
+	'scripts' => array( 'uespitemlink.js' ),
+	'localBasePath' => __DIR__,
+	'remoteBasePath' => "$wgScriptPath/extensions/UespEsoItemLink/",
+	'targets' => array( 'desktop', 'mobile' ),
+);
 
 
 function uespEsoItemLinkParserInit(Parser $parser)
 {
+	global $wgOut;
+	
 	$parser->setHook('esoitemlink', 'uespRenderEsoItemLink');
+	
+	$wgOut->addModules( 'ext.EsoItemLink.scripts' );
+	$wgOut->addModuleStyles( 'ext.EsoItemLink.styles' );
+		
 	return true;
 }
 
