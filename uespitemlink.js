@@ -1,18 +1,18 @@
-var EsoItemLinkPopup = null;
-var EsoItemLinkPopup_LastElement = null;
-var EsoItemLinkPopup_Visible = false;
-var EsoItemLinkPopup_CacheId = "";
-var EsoItemLinkPopup_Cache = { };
+window.EsoItemLinkPopup = null;
+window.EsoItemLinkPopup_LastElement = null;
+window.EsoItemLinkPopup_Visible = false;
+window.EsoItemLinkPopup_CacheId = "";
+window.EsoItemLinkPopup_Cache = { };
 
 
-function CreateEsoItemLinkPopup()
+window.CreateEsoItemLinkPopup = function()
 {
 	EsoItemLinkPopup = $('<div />').addClass('eso_item_link_popup').hide();
 	$('body').append(EsoItemLinkPopup);
 }
 
 
-function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLevel, intType, itemLink, setCount, questId, collectId, enchantId, enchantIntLevel, enchantIntType, enchantFactor, potionData, extraData, version, extraArmor, trait)
+window.ShowEsoItemLinkPopup = function (parent, itemId, level, quality, showSummary, intLevel, intType, itemLink, setCount, questId, collectId, enchantId, enchantIntLevel, enchantIntType, enchantFactor, potionData, extraData, version, extraArmor, trait)
 {
 	EsoItemLinkPopup_LastElement = parent;
 	
@@ -116,7 +116,7 @@ function ShowEsoItemLinkPopup(parent, itemId, level, quality, showSummary, intLe
 }
 
 
-function AdjustEsoItemLinkTooltipPosition(tooltip, parent)
+window.AdjustEsoItemLinkTooltipPosition = function(tooltip, parent)
 {
 	var windowWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 	var windowHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
@@ -192,7 +192,7 @@ function AdjustEsoItemLinkTooltipPosition(tooltip, parent)
 }
 
 
-function HideEsoItemLinkPopup()
+window. HideEsoItemLinkPopup = function()
 {
 	EsoItemLinkPopup_Visible = false;
 	if (EsoItemLinkPopup == null) return;
@@ -200,7 +200,7 @@ function HideEsoItemLinkPopup()
 }
 
 
-function OnEsoItemLinkEnter()
+window.OnEsoItemLinkEnter = function()
 {
 	var $this = $(this);
 	EsoItemLinkPopup_LastElement = $this;
@@ -213,7 +213,7 @@ function OnEsoItemLinkEnter()
 }
 
 
-function OnEsoItemLinkLeave()
+window.OnEsoItemLinkLeave = function()
 {
 	EsoItemLinkPopup_LastElement = null;
 	HideEsoItemLinkPopup();
