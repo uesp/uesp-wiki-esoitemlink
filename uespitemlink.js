@@ -95,7 +95,7 @@ window.ShowEsoItemLinkPopup = function (parent, itemId, level, quality, showSumm
 		
 		AdjustEsoItemLinkTooltipPosition(EsoItemLinkPopup, $(parent));
 		
-		$(document).trigger("esoTooltipUpdate", [EsoItemLinkPopup]);
+		$(document).trigger("esoTooltipUpdate", [EsoItemLinkPopup, parent]);
 	}
 	else
 	{
@@ -110,7 +110,7 @@ window.ShowEsoItemLinkPopup = function (parent, itemId, level, quality, showSumm
 			
 			AdjustEsoItemLinkTooltipPosition(EsoItemLinkPopup, $(parent));
 			
-			$(document).trigger("esoTooltipUpdate", [EsoItemLinkPopup]);
+			$(document).trigger("esoTooltipUpdate", [EsoItemLinkPopup, parent]);
 		});
 	}
 }
