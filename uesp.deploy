@@ -11,6 +11,7 @@ staged = true
 
 ignore = *.deploy
 ignore = .hg*
+ignore = .git*
 
 dest = content1.uesp.net:/home/uesp/www/w/extensions/UespEsoItemLink/
 dest = content2.uesp.net:/home/uesp/www/w/extensions/UespEsoItemLink/
